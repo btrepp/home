@@ -1,4 +1,4 @@
-k3s_become_for_all: true
+k3s_become: true
 k3s_registration_address: 192.168.4.11
 k3s_write_kubeconfig_mode: 644 
 k3s_server:
