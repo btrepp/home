@@ -1,0 +1,23 @@
+---
+all:
+  children:
+    k8s1:
+    ungrouped:
+
+k8s1_worker:
+  hosts:
+    k8s1w1:
+    k8s1w2:
+
+k8s1_server:
+  hosts:
+    k8s1s1:
+
+ungrouped:
+  hosts:
+    nas:
+
+k8s1:
+  children:
+    k8s1_worker:
+    k8s1_server:

@@ -1,0 +1,13 @@
+k3s_become_for_all: true
+k3s_registration_address: 192.168.4.10
+k3s_write_kubeconfig_mode: 644 
+k3s_server:
+  node-taint:
+  - "k3s-controlplane=true:NoExecute"
+  disable:
+  - servicelb
+  - local-storage
+  - traefik
+helm_arch: arm
+ansible_user: pi
+ansible_python_interpreter: /usr/bin/python3

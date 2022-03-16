@@ -1,0 +1,16 @@
+- name: Copy Config  
+  hosts: k8s1s1
+  tasks:
+  - name: Fetch k3s.yaml
+    become: yes
+    ansible.builtin.fetch:
+      src: /etc/rancher/k3s/k3s.yaml    
+      dest: "/mnt/c/Users/Beau/SynologyDrive/K8S1/"  
+      flat: yes
+
+  - name: Replace address
+    local_action:
+        module: ansible.builtin.replace
+        path: "/mnt/c/Users/Beau/SynologyDrive/K8S1/k3s.yaml"
+        regexp: '127.0.0.1'
+        replace: '192.168.4.11'

@@ -1,0 +1,24 @@
+- name: Build a cluster with HA control plane
+  hosts: k8s1
+
+  pre_tasks:
+  - name: Set hostname
+    become: yes
+    hostname:
+      name: "{{ inventory_hostname }}"
+
+  - become: yes
+    apt:
+      name: dphys-swapfile
+      state: absent
+  - become: yes
+    apt:
+      pkg:
+      - open-iscsi
+      - unattended-upgrades
+
+  roles:
+    - role: rpi-cgroups
+    - role: xanmanning.k3s
+    
+

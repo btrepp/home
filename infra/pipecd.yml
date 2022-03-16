@@ -1,0 +1,24 @@
+- name: Setup pipe-cd
+  hosts: k8s1
+  become: yes
+
+  pre_tasks:
+  - name: "Make sure yaml is installed"
+    apt:
+      name: python3-yaml
+
+  - name: Add stable chart repo
+    kubernetes.core.helm_repository:
+      name: pipecd
+      repo_url: "https://charts.pipecd.dev"
+
+  tasks:
+  - name: Deploy pipecd
+    kubernetes.core.helm:
+      name: pipecd
+      release_namespace: pipecd
+      chart_ref: pipecd/pipecd
+      kubeconfig: /etc/rancher/k3s/k3s.yaml
+      create_namespace: yes
+      values:
+        installCRDs: true

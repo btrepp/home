@@ -1,0 +1,12 @@
+- name: Ensure can always access with public keys
+  hosts: k8s1
+  tasks:
+  - name: Set up multiple authorized keys
+    authorized_key:
+      user: pi
+      state: present
+      key: '{{ item }}'
+    with_file:
+      - authorized_keys/beau.pub
+      - authorized_keys/laptop.pub
+      - authorized_keys/desktop.pub
