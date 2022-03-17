@@ -1,0 +1,20 @@
+- name: Add argocd
+  hosts: k8s1s1
+  become: yes
+
+  tasks:
+  - name: Add argo chart repo
+    become: yes
+    kubernetes.core.helm_repository:
+      name: argo
+      repo_url: https://argoproj.github.io/argo-helm
+
+  - name: Deploy argocd
+    become: yes
+    environment:
+      KUBECONFIG: /etc/rancher/k3s/k3s.yaml
+    kubernetes.core.helm:
+      name: argocd
+      chart_ref: argo/argo-cd
+      release_namespace: argocd
+      create_namespace: true
