@@ -18,3 +18,8 @@
       chart_ref: argo/argo-cd
       release_namespace: argocd
       create_namespace: true
+      values:
+        applicationSet:
+          image:
+            repository: ghcr.io/jr64/argocd-applicationset
+            tag: "v0.4.0"
