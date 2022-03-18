@@ -10,4 +10,6 @@ k3s_server:
   - traefik
 helm_arch: arm
 ansible_user: pi
-ansible_python_interpreter: /usr/bin/python3
+ansible_python_interpreter: /usr/bin/python
+
+argocd_tunnel_credentials: "{{ lookup('passwordstore', 'k8s1/argocd/tunnel-credentials returnall=true')}}"

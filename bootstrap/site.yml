@@ -1,4 +1,3 @@
-- import_playbook: access.yml
-- import_playbook: k8s1.yml
-- import_playbook: argocd.yml
-- import_playbook: lens.yml
+- import_playbook: playbooks/access.yml
+- import_playbook: playbooks/k8s1.yml
+- import_playbook: playbooks/argocd.yml

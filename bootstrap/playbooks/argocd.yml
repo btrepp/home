@@ -55,3 +55,19 @@
             automated:
               prune: true
               selfHeal: true
+
+  - name: Tunnel credentials
+    become: yes
+    environment:
+      KUBECONFIG: /etc/rancher/k3s/k3s.yaml
+    kubernetes.core.k8s:
+      state: present
+      definition:
+        apiVersion: v1
+        kind: Secret
+        metadata:
+          name: tunnel-credentials
+          namespace: argocd
+        stringData:
+          credentials.json: |
+           "{{ argocd_tunnel_credentials }}"

@@ -7,6 +7,6 @@
       state: present
       key: '{{ item }}'
     with_file:
-      - authorized_keys/beau.pub
-      - authorized_keys/laptop.pub
-      - authorized_keys/desktop.pub
+      - ../authorized_keys/beau.pub
+      - ../authorized_keys/laptop.pub
+      - ../authorized_keys/desktop.pub
