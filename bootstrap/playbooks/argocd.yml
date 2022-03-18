@@ -25,6 +25,9 @@
       release_namespace: argocd
       create_namespace: true
       values:
+        server:
+          extraArgs:
+          - --insecure
         applicationSet:
           image:
             repository: ghcr.io/jr64/argocd-applicationset
@@ -68,6 +71,5 @@
         metadata:
           name: tunnel-credentials
           namespace: argocd
-        stringData:
-          credentials.json: |
-           "{{ argocd_tunnel_credentials }}"
+        data:
+          credentials.json: "{{ argocd_tunnel_credentials | b64encode }}"
