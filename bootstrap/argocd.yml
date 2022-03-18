@@ -1,0 +1,57 @@
+- name: Add argocd
+  hosts: k8s1s1
+  become: yes
+
+  pre_tasks:
+  - name: Install kubernetes python
+    become: yes
+    apt:
+      pkg:
+      - python3-kubernetes
+
+  - name: Add argo chart repo
+    become: yes
+    kubernetes.core.helm_repository:
+      name: argo
+      repo_url: https://argoproj.github.io/argo-helm
+
+  - name: Deploy argocd
+    become: yes
+    environment:
+      KUBECONFIG: /etc/rancher/k3s/k3s.yaml
+    kubernetes.core.helm:
+      name: argocd
+      chart_ref: argo/argo-cd
+      release_namespace: argocd
+      create_namespace: true
+      values:
+        applicationSet:
+          image:
+            repository: ghcr.io/jr64/argocd-applicationset
+            tag: "v0.4.0"
+
+  - name: Create core argo app
+    become: yes
+    environment:
+      KUBECONFIG: /etc/rancher/k3s/k3s.yaml
+    kubernetes.core.k8s:
+      state: present
+      definition:
+        apiVersion: argoproj.io/v1alpha1
+        kind: Application
+        metadata:
+          name: root
+          namespace: argocd
+        spec:
+          project: default
+          source:
+            repoURL: https://github.com/btrepp/home.git
+            targetRevision: HEAD
+            path: root
+          destination:
+            server: https://kubernetes.default.svc
+            namespace: argocd
+          syncPolicy:
+            automated:
+              prune: true
+              selfHeal: true
