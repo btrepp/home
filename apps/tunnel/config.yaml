@@ -14,6 +14,8 @@ ingress:
   service: https://kubernetes-dashboard.dash.svc.cluster.local:443
   originRequest:                                                              
     noTLSVerify: true
+- hostname: registry.concernedturtle.com
+  service: http://docker-registry.registry.svc.cluster.local:5000
 - hostname: hello-argocd.concernedturtle.com
   service: hello_world
 - service: http_status:404
