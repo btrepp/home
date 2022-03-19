@@ -60,3 +60,32 @@
             automated:
               prune: true
               selfHeal: true
+
+  - name: Create cluster settings app
+    become: yes
+    environment:
+      KUBECONFIG: /etc/rancher/k3s/k3s.yaml
+    kubernetes.core.k8s:
+      state: present
+      definition:
+
+        apiVersion: argoproj.io/v1alpha1
+        kind: Application
+        metadata:
+          name: cluster
+          namespace: argocd
+          finalizers:
+          - resources-finalizer.argocd.argoproj.io
+        spec:
+          destination:
+            server: https://kubernetes.default.svc
+            namespace: argocd
+          project: default
+          source:
+            path: cluster
+            repoURL: https://github.com/btrepp/home.git
+            targetRevision: HEAD
+          syncPolicy:
+            automated:
+              prune: true
+              selfHeal: true
