@@ -22,7 +22,7 @@ metadata:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: dash-helm
+  name: dash
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
