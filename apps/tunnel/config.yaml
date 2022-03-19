@@ -2,23 +2,18 @@
 # It's useful to define it in k8s, rather than as a stand-alone .yaml file, because
 # this lets you use various k8s templating solutions (e.g. Helm charts) to
 # parameterize your config, instead of just using string literals.
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: cloudflared
-data:
-  config.yaml: |
-    tunnel: 070e722d-70ec-4751-a850-5ff9ea928cd3  
-    credentials-file: /etc/cloudflared/creds/credentials.json
-    metrics: 0.0.0.0:2000
-    no-autoupdate: true
-    ingress:
-    - hostname: argocd.concernedturtle.com
-      service: http://argocd-server.argocd.svc.cluster.local:80
-    - hostname: dash.concernedturtle.com
-      service: https://kubernetes-dashboard.dash.svc.cluster.local:443
-      originRequest:                                                              
-        noTLSVerify: true
-    - hostname: hello-argocd.concernedturtle.com
-      service: hello_world
-    - service: http_status:404
+
+tunnel: 070e722d-70ec-4751-a850-5ff9ea928cd3  
+credentials-file: /etc/cloudflared/creds/credentials.json
+metrics: 0.0.0.0:2000
+no-autoupdate: true
+ingress:
+- hostname: argocd.concernedturtle.com
+  service: http://argocd-server.argocd.svc.cluster.local:80
+- hostname: dash.concernedturtle.com
+  service: https://kubernetes-dashboard.dash.svc.cluster.local:443
+  originRequest:                                                              
+    noTLSVerify: true
+- hostname: hello-argocd.concernedturtle.com
+  service: hello_world
+- service: http_status:404
