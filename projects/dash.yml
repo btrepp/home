@@ -13,11 +13,35 @@ spec:
   sourceRepos:
   - 'https://github.com/btrepp/home.git'
   - 'https://kubernetes.github.io/dashboard/'
+  
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
   name: dash
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: view-user
+  namespace: dash
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: view-user
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: dashboard-viewonly
+subjects:
+- kind: ServiceAccount
+  name: view-user
+  namespace: dash
+
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
