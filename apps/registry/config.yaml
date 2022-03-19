@@ -1,0 +1,22 @@
+health:
+  storagedriver:
+    enabled: true
+    interval: 10s
+    threshold: 3
+http:
+  addr: :5000
+  debug:
+    addr: :5001
+    prometheus:
+      enabled: false
+      path: /metrics
+  headers:
+    X-Content-Type-Options:
+    - nosniff
+log:
+  fields:
+    service: registry
+storage:
+  cache:
+    blobdescriptor: inmemory
+version: 0.1

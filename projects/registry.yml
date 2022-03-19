@@ -34,11 +34,9 @@ spec:
     namespace: registry
   project: registry
   source:
-    chart: docker-registry
-    repoURL: https://helm.twun.io
-    targetRevision: 2.1.0
-    helm:
-      releaseName: docker-registry
+    path: apps/registry
+    repoURL: https://github.com/btrepp/home.git
+    targetRevision: HEAD
   syncPolicy:
     automated:
       prune: true
