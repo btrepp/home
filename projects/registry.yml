@@ -38,7 +38,7 @@ spec:
     repoURL: https://helm.twun.io
     targetRevision: 2.1.0
     helm:
-      releaseName: kubernetes-dashboard
+      releaseName: docker-registry
   syncPolicy:
     automated:
       prune: true
