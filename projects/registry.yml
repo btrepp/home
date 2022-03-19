@@ -13,7 +13,6 @@ spec:
   sourceRepos:
   - 'https://github.com/btrepp/home.git'
   - 'https://helm.twun.io'
-  - 'https://helm.goharbor.io'
 ---
 
 apiVersion: v1
@@ -35,9 +34,9 @@ spec:
     namespace: registry
   project: registry
   source:
-    chart: harbor
-    repoURL: https://helm.goharbor.io
-    targetRevision: 1.8.2
+    chart: docker-registry
+    repoURL: https://helm.twun.io
+    targetRevision: 2.1.0
     helm:
       releaseName: docker-registry
   syncPolicy:
