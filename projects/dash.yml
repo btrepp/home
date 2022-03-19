@@ -1,17 +1,32 @@
 apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: admin
+  namespace: argocd
+spec:
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  destinations:
+  - namespace: 'tunnel'
+    server: 'https://kubernetes.default.svc'
+  sourceRepos:
+  - 'https://github.com/btrepp/home.git'
+---
+apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd
+  name: dash
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
     server: https://kubernetes.default.svc
-    namespace: argocd
+    namespace: dash
   project: default
   source:
-    path: argocd
+    path: dash
     repoURL: https://github.com/btrepp/home.git
     targetRevision: HEAD
   syncPolicy:

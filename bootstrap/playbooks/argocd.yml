@@ -45,12 +45,14 @@
         metadata:
           name: root
           namespace: argocd
+          finalizers:
+          - resources-finalizer.argocd.argoproj.io
         spec:
           project: default
           source:
             repoURL: https://github.com/btrepp/home.git
             targetRevision: HEAD
-            path: root
+            path: projects
           destination:
             server: https://kubernetes.default.svc
             namespace: argocd
@@ -58,18 +60,3 @@
             automated:
               prune: true
               selfHeal: true
-
-  - name: Tunnel credentials
-    become: yes
-    environment:
-      KUBECONFIG: /etc/rancher/k3s/k3s.yaml
-    kubernetes.core.k8s:
-      state: present
-      definition:
-        apiVersion: v1
-        kind: Secret
-        metadata:
-          name: tunnel-credentials
-          namespace: argocd
-        data:
-          credentials.json: "{{ argocd_tunnel_credentials | b64encode }}"
