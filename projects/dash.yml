@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: admin
+  name: dash
   namespace: argocd
 spec:
   clusterResourceWhitelist:
   - group: '*'
     kind: '*'
   destinations:
-  - namespace: 'tunnel'
+  - namespace: 'dash'
     server: 'https://kubernetes.default.svc'
   sourceRepos:
   - 'https://github.com/btrepp/home.git'
