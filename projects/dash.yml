@@ -12,6 +12,7 @@ spec:
     server: 'https://kubernetes.default.svc'
   sourceRepos:
   - 'https://github.com/btrepp/home.git'
+  - 'https://kubernetes.github.io/dashboard/'
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
