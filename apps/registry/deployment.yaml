@@ -16,7 +16,7 @@ spec:
       - command:
         - /bin/registry
         - serve
-        - /etc/docker/registry/config.yml
+        - /etc/docker/registry/config.yaml
         env:
         - name: REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY
           value: /var/lib/registry
