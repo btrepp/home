@@ -35,7 +35,7 @@ spec:
   project: registry
   source:
     chart: docker-registry
-    repoURL: https://helm.twun.io'
+    repoURL: https://helm.twun.io
     targetRevision: 2.1.0
     helm:
       releaseName: kubernetes-dashboard
