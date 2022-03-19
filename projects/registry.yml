@@ -1,0 +1,45 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: registry
+  namespace: argocd
+spec:
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  destinations:
+  - namespace: registry
+    server: 'https://kubernetes.default.svc'
+  sourceRepos:
+  - 'https://github.com/btrepp/home.git'
+  - 'https://helm.twun.io'
+---
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: registry
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: registry
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: registry
+  project: registry
+  source:
+    chart: docker-registry
+    repoURL: https://helm.twun.io'
+    targetRevision: 2.1.0
+    helm:
+      releaseName: kubernetes-dashboard
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
