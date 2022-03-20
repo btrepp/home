@@ -1,0 +1,68 @@
+- name: Add registry storage
+  hosts: k8s1s1
+  become: yes
+
+  pre_tasks:
+  - name: Install kubernetes python
+    become: yes
+    apt:
+      pkg:
+      - python3-kubernetes
+
+  - name: Registry namespace
+    become: yes
+    environment:
+      KUBECONFIG: /etc/rancher/k3s/k3s.yaml
+    kubernetes.core.k8s:
+      state: present
+      definition:
+        apiVersion: v1
+        kind: Namespace
+        metadata:
+          name: registry
+
+  - name: Registry volume
+    become: yes
+    environment:
+      KUBECONFIG: /etc/rancher/k3s/k3s.yaml
+    kubernetes.core.k8s:
+      state: present
+      definition:
+        apiVersion: v1
+        kind: PersistentVolume
+        metadata:
+          name: pv-registry
+          labels:
+            k8s-app: kubernetes-registry
+        spec:
+          capacity:
+            storage: 100Gi
+          accessModes:
+          - ReadWriteOnce
+          nfs:
+            path: /volume1/Kubernetes/data/registry
+            server: "{{ nas_ip }}"
+          persistentVolumeReclaimPolicy: Retain
+          storageClassName: sc-registry
+
+  - name: Registry volume claim
+    become: yes
+    environment:
+      KUBECONFIG: /etc/rancher/k3s/k3s.yaml
+    kubernetes.core.k8s:
+      state: present
+      definition:
+        apiVersion: v1
+        kind: PersistentVolumeClaim
+        metadata:
+          name: pvc-registry
+          namespace: registry
+          labels:
+            k8s-app: kubernetes-registry
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 100Gi
+          storageClassName: sc-registry

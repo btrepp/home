@@ -2,3 +2,4 @@
 - import_playbook: playbooks/k8s1.yml
 - import_playbook: playbooks/argocd.yml
 - import_playbook: playbooks/secrets.yml
+- import_playbook: playbooks/storage.yml
