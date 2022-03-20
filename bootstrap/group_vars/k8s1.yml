@@ -13,3 +13,5 @@ ansible_user: pi
 ansible_python_interpreter: /usr/bin/python
 
 argocd_tunnel_credentials: "{{ lookup('passwordstore', 'k8s1/argocd/tunnel-credentials returnall=true')}}"
+
+registry_beau_pass: "{{ lookup('passwordstore', 'k8s1/registry/beau')}}"
