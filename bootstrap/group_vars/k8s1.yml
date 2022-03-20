@@ -16,5 +16,6 @@ argocd_tunnel_credentials: "{{ lookup('passwordstore', 'k8s1/argocd/tunnel-crede
 
 registry_beau_pass: "{{ lookup('passwordstore', 'k8s1/registry/beau')}}"
 registry_k8s1_pass: "{{ lookup('passwordstore', 'k8s1/registry/k8s1')}}"
+registry_sourcehut_pass: "{{ lookup('passwordstore', 'k8s1/registry/builds.sr.ht')}}"
 
 nas_ip: 192.168.1.10
