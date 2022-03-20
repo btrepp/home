@@ -73,7 +73,7 @@ spec:
       - secret:
           secretName: registry-secrets
           items:
-            key: htpasswd
+          - key: htpasswd
             path: htpasswd
         name: auth
       - configMap:
