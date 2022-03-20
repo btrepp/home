@@ -26,6 +26,8 @@ spec:
           value: "Registry Realm"
         - name: REGISTRY_AUTH_HTPASSWD_PATH
           value: "/auth/htpasswd"
+        - name: REGISTRY_HTTP_HOST
+          value: https://registry.concernedturtle.com
         image: registry:2.7.1
         imagePullPolicy: IfNotPresent
         livenessProbe:
