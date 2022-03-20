@@ -20,6 +20,12 @@ spec:
         env:
         - name: REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY
           value: /var/lib/registry
+        - name: REGISTRY_AUTH
+          value: "htpasswd"
+        - name: REGISTRY_AUTH_HTPASSWD_REALM
+          value: "Registry Realm"
+        - name: REGISTRY_AUTH_HTPASSWD_PATH
+          value: "/auth/htpasswd"
         image: registry:2.7.1
         imagePullPolicy: IfNotPresent
         livenessProbe:
@@ -52,6 +58,8 @@ spec:
           name: data
         - mountPath: /etc/docker/registry
           name: docker-registry-config
+        - mountPath: /auth
+          name: auth
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
@@ -62,6 +70,12 @@ spec:
       volumes:
       - emptyDir: {}
         name: data
+      - secret:
+          secretName: registry-secrets
+          items:
+            key: htpasswd
+            path: htpasswd
+        name: auth
       - configMap:
           defaultMode: 420
           name: docker-registry-config
