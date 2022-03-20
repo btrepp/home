@@ -14,10 +14,10 @@ spec:
       labels:
         app: blog
     spec:
+      imagePullSecrets:
+      - name: registry-credentials
       containers:
       - name: blog
         image: registry.concernedturtle.com/btrepp/blog
-        imagePullSecrets:
-        - name: registry-credentials
         ports:
         - containerPort: 80
