@@ -50,7 +50,7 @@
         spec:
           project: default
           source:
-            repoURL: https://github.com/btrepp/home.git
+            repoURL: "{{ argocd_infra_repo }}"
             targetRevision: HEAD
             path: projects
           destination:
@@ -83,7 +83,7 @@
           project: default
           source:
             path: cluster
-            repoURL: https://github.com/btrepp/home.git
+            repoURL: "{{ argocd_infra_repo }}"
             targetRevision: HEAD
           syncPolicy:
             automated:

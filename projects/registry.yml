@@ -11,8 +11,7 @@ spec:
   - namespace: registry
     server: 'https://kubernetes.default.svc'
   sourceRepos:
-  - 'https://github.com/btrepp/home.git'
-  - 'https://helm.twun.io'
+  - 'https://git.sr.ht/~btrepp/infrastructure'
 ---
 
 apiVersion: v1
@@ -35,7 +34,7 @@ spec:
   project: registry
   source:
     path: apps/registry
-    repoURL: https://github.com/btrepp/home.git
+    repoURL: 'https://git.sr.ht/~btrepp/infrastructure'
     targetRevision: HEAD
   syncPolicy:
     automated:

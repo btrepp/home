@@ -11,7 +11,6 @@ spec:
   - namespace: 'dash'
     server: 'https://kubernetes.default.svc'
   sourceRepos:
-  - 'https://github.com/btrepp/home.git'
   - 'https://kubernetes.github.io/dashboard/'
   
 ---

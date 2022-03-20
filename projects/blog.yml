@@ -11,7 +11,7 @@ spec:
   - namespace: blog
     server: 'https://kubernetes.default.svc'
   sourceRepos:
-  - 'https://github.com/btrepp/home.git'
+  - 'https://git.sr.ht/~btrepp/infrastructure'
 ---
 
 apiVersion: v1
@@ -34,7 +34,7 @@ spec:
   project: blog
   source:
     path: apps/blog
-    repoURL: https://github.com/btrepp/home.git
+    repoURL: 'https://git.sr.ht/~btrepp/infrastructure'
     targetRevision: HEAD
   syncPolicy:
     automated:
